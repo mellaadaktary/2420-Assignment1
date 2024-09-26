@@ -75,7 +75,7 @@ doctl auth init
 ```
 - `doctl` is the Command-Line Interface for DigitalOcean
 - `auth` deals with authentication-related tasks
-- `init` initializes the authentication process
+- `init` initializes the authentication process[^8]
 
 after running this command doctl will ask for the personal access token
 
@@ -85,7 +85,7 @@ after this step run:
 ```bash
 doctl account get
 ```
-- `account get` retrieves details from your profile such as Email Address, Team, Account Droplet limit , and more. 
+- `account get` retrieves details from your profile such as Email Address, Team, Account Droplet limit , and more. [^9]
 if everything went successfully you should see an output that says this 
 ![[doctl account get.png]]
 
@@ -93,7 +93,7 @@ we are now going to connect the public SSH key from the previous task to our Dig
 ```bash
  doctl compute ssh-key import <name> --public-key-file ~/.ssh/my-key.pub
 ```
-##### explanations
+
 
 To confirm that our ssh key is paired to our DigitalOcean account we can run:
 ```bash
@@ -109,3 +109,12 @@ if everything went successfully you should see something like this:
 
 
 # references:
+[^1]: https://www.cloudflare.com/learning/access-management/what-is-ssh/ 
+[^2]: https://www.geeksforgeeks.org/difference-ssh-telnet/ 
+[^3]: https://wiki.archlinux.org/title/SSH_keys
+[^4]: https://explainshell.com/explain?cmd=ls
+[^5]: https://docs.digitalocean.com/reference/doctl/#:~:text=doctl%20allows%20you%20to%20interact,clusters%2C%20domains%2C%20and%20more.
+[^6]: https://docs.cloud-init.io/en/latest/explanation/introduction.html
+[^7]: https://docs.digitalocean.com/reference/doctl/reference/compute/ssh-key/import/
+[^8]: https://docs.digitalocean.com/reference/doctl/reference/auth/init/
+[^9]: https://docs.digitalocean.com/reference/doctl/reference/account/get/
