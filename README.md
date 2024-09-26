@@ -1,97 +1,26 @@
 # 2420-Assignment1
 
-# Tasks
+by the end of this guide users should be able to:
 
-create a tutorial using markdown
+Create SSH keys on your local machine
 
+Create a Droplet running Arch Linux using the `doctl` command-line tool.
 
-takes a user through the steps of creating a remote server using DigitalOcean
-
-- Create ssh keys and add them to your digital ocean account
-
-- add a custom arch linux image
-
-- create a droplet running arch linux using the "doctl" command-line tool
-
-- use `doctl` and cloud-init for every stage of setting up Arch Linux droplet
-
-  
-
-# INSTRUCTION DETAILS
-
-    use a cloud-init configuration file to:
-
-        1.create a regular user
-
-        2.install some initial packages
-
-        3.add a public ssh key to the authorized_keys file in your new users home directory
-
-        4. disable root access via ssh
-
-  
-  
-  
-  
-  
-  
-  
-
-# Title(explain what ssh is and why its better than password authentication)
-
-  
-
-Create an SSH key pair
-
-  
-
-to create an SSH key pair you need to open your terminal and run the ```ssh-keygen```  command
-
-  
-
-Your computer should already ```ssh-keygen``` installed
-
-open your terminal and run:
-
-#### Linux and mac:
-```ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "name or email" ```
+use `doctl` and cloud-init to set up an Arch Linux droplet
 
 
-Note: windows users might need to create .SSH directory first.
-#### Windows
-```ssh-keygen -t ed25519 -f C:\Users\user-name\.shh\do-key -C "name or email" ```
+# Create SSH keys on your local Machine:
+SSH stands for Secure Shell, and it's a method of sending commands securely to another computer over an unsecured network. It is commonly used to control servers remotely, manage infrastructure, and transfer files. SSH uses Public key cryptography, a way to encrypt data with two different keys, a private key and a public key. Essentially, whenever someone wants to connect to a server via SSH, they use the server's public key to encrypt the communication. Only the server with its private key can decrypt it. This process makes it possible to communicate over an unsecured network as the data remains encrypted. [^1]
 
-# explanation of the commands and - and what everything does
+### WHY SSH? 
+Before SSH,  administrators used Telnet, which was a method of sending data to another computer without encrypting the information; this made it prone to security-related threats. There are no authentication policies or data encryption techniques for telnet, which is why it is a huge security risk and another reason why it's less popular since SSH came out. Although it is used in private networks still, it's not used over unsecured or public networks.[^2] 
 
--
--
--
--
--
--
--
--
--
--
--
-note that ```ssh-keygen``` generates two keys
-A. "do-key"a private key which is for you to keep
-B. "do-key.pub" this is your public key that you copy to your server
-# Adding public key to digital ocean
 
-after making the ssh key pair you need to add the public key to your DigitalOcean account
+# Installing doctl
 
-to add the publick key pair to you account you need to copy it to the terminal.
-the following commands show you how to copy the content to your clipboard from your terminal
+# Cloud-init
 
-In windows:
-```Get-content C:\Users\user-name\.ssh\do-key.pub | Set-Clipboard```
-In mac:
-```pbcopy < ~/.ssh/do-key.pub```
-In Linux:
-```wl-copy < ~/.ssh/do-key.pub```
-(Note! it can vary depending on your Linux system)
+# deploying the droplet
 
-once you have the run the above command the ```do-key.pub``` should be copied to your clipboard now we need to use the CLI (command-line Interface) to edit our droplet
-# Doctl
 
+# references:
