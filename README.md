@@ -93,7 +93,8 @@ we are now going to connect the public SSH key from the previous task to our Dig
 ```bash
  doctl compute ssh-key import <name> --public-key-file ~/.ssh/my-key.pub
 ```
-
+- `doctl compute ssh-key import` adds a new SSH key to your account
+- `--public-key-file <filepath>` is a flag which needs the public ssh key file
 
 To confirm that our ssh key is paired to our DigitalOcean account we can run:
 ```bash
