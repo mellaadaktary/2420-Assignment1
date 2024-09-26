@@ -143,6 +143,37 @@ Note: make sure you are in insert mode
 
 # deploying the droplet
 
+we need to check for our custom image[^11] using the command below:
+```bash
+doctl compute image list-user
+```
+
+you should see something like this:
+![[custom-image.png]]
+
+now we can create the droplet[^12] by typing:
+```bash
+doctl compute droplet create <dropletname> --image <Custom-image-id> --region sfo3 --size s-1vcpu-1gb --ssh-keys <SSH Key ID> --user-data-file <Path-to-cloud-init-ALinux.yml> 
+```
+
+show success page
+![[Pasted image 20240926095958.png]]
+
+### explanations ^
+
+to connect to ur ssh 
+```bash
+ssh -i ~/.ssh/my-key usercloudinitFile@<KEYID>
+```
+
+```bash
+doctl compute ssh-key list
+```
+
+gives list of ssh keys on digital ocean account
+dosentwork^
+
+
 
 # references:
 [^1]: https://www.cloudflare.com/learning/access-management/what-is-ssh/ 
@@ -155,3 +186,5 @@ Note: make sure you are in insert mode
 [^8]: https://docs.digitalocean.com/reference/doctl/reference/auth/init/
 [^9]: https://docs.digitalocean.com/reference/doctl/reference/account/get/
 [^10]: https://docs.cloud-init.io/en/latest/explanation/introduction.html
+[^11]: https://docs.digitalocean.com/reference/doctl/reference/compute/image/list/
+[^12]: https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/create/
