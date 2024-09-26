@@ -42,7 +42,7 @@ After running this command you will be asked for a passphrase. It is good practi
  ```bash
 ls
 ```
-```ls``` stands for list directory contents.[^5]
+```ls``` stands for list directory contents.[^4]
 
 if everything went according to plan you should see something like this:
 
