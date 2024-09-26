@@ -73,12 +73,19 @@ go back to your terminal and type:
 ```bash 
 doctl auth init
 ```
-after running this command doctl will ask for the person access token
+`doctl` is the Command-Line Interface for DigitalOcean
+`auth` deals with authentication-related tasks
+`init` initializes the authentication process
+
+after running this command doctl will ask for the personal access token
+
 11. paste it into the prompt and press enter
+
 after this step run:
 ```bash
 doctl account get
 ```
+^explanation
 if everything went successfully you should see an output that says this 
 ![[doctl account get.png]]
 
