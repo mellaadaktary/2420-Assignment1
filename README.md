@@ -105,6 +105,41 @@ if everything went successfully you should see something like this:
 #### Explanation
 
 # Cloud-init
+When trying to manage and configure multiple cloud instances and servers, creating them 1 by 1 can be very time-consuming. This is where Cloud-init comes into play, Cloud-init is an open-source initialization tool that was designed to make getting your systems up and running easy and configured to your liking.
+
+When you deploy a new cloud instance, cloud-init takes the configuration that you gave it and automatically applies it like a checklist. Cloud-init can do a multitude of things such as set Hostnames, configure network interfaces, create user accounts, and even run scripts.[^6]
+
+1. we need to create a cloud-init-ALinux.yml file:
+```bash
+vim cloud-init-ALinux.yml
+```
+now that we have the file paste this yml file content:
+```yml
+#cloud-config
+users:
+  - name: <your-username>
+    primary_group: <Group-name>
+    groups: wheel
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-ed25519 <Public key> <your-email>
+packages:
+  - ripgrep
+  - rsync
+  - neovim
+  - fd
+  - less
+  - man-db
+  - bash-completion
+  - tmux
+disable_root: true
+```
+
+#### explanations of everything above
+how to get public key
+
+Note: make sure you are in insert mode
 
 # deploying the droplet
 
