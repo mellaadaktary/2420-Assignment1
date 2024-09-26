@@ -85,7 +85,7 @@ after this step run:
 ```bash
 doctl account get
 ```
-^explanation
+- `account get` retrieves details from your profile such as Email Address, Team, Account Droplet limit , and more. 
 if everything went successfully you should see an output that says this 
 ![[doctl account get.png]]
 
