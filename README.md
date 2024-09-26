@@ -73,9 +73,9 @@ go back to your terminal and type:
 ```bash 
 doctl auth init
 ```
-`doctl` is the Command-Line Interface for DigitalOcean
-`auth` deals with authentication-related tasks
-`init` initializes the authentication process
+- `doctl` is the Command-Line Interface for DigitalOcean
+- `auth` deals with authentication-related tasks
+- `init` initializes the authentication process
 
 after running this command doctl will ask for the personal access token
 
