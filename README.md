@@ -47,8 +47,54 @@ ls
 if everything went according to plan you should see something like this:
 
 ![[sshkeysmade.png]]
-once we have our keys we now need to install ``` doctl``` in order to create a droplet
+once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
+doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl.[^5] 
+
+to Install doctl we need to run:
+1. 
+``` bash
+sudo pacman -S doctl
+```
+- `sudo` stands for super user do and it temporarily upgrades your privileges to run commands only the `root`user could execute
+- `pacman` stands for package manager and is one of Arch Linux most distinguishing features it can do many things such as install, upgrade, and delete packages
+- `-S` is the flag which lets us install packages with `pacman`.
+2. after running the previous command go to https://cloud.digitalocean.com/account/api/tokens
+3. Click on Generate New Token
+4. Input a Token Name
+5. Leave the Expiration date to 90 days
+6. Select Full Access on Scopes
+- Note: we give full Access as we want doctl to be able to run the commands as the current users permission level
+8. Click Generate token
+9. Copy the new personal access token it should look something like this:
+![[personaltoken.png]]
+go back to your terminal and type:
+10. 
+```bash 
+doctl auth init
+```
+after running this command doctl will ask for the person access token
+11. paste it into the prompt and press enter
+after this step run:
+```bash
+doctl account get
+```
+if everything went successfully you should see an output that says this 
+![[doctl account get.png]]
+
+we are now going to connect the public SSH key from the previous task to our DigitalOcean account by running:[^7]
+```bash
+ doctl compute ssh-key import <name> --public-key-file ~/.ssh/my-key.pub
+```
+##### explanations
+
+To confirm that our ssh key is paired to our DigitalOcean account we can run:
+```bash
+doctl compute ssh-key list
+```
+if everything went successfully you should see something like this:
+![[digitaloceanssh.png]]
+#### Explanation
 
 # Cloud-init
 
