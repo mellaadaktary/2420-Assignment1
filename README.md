@@ -58,7 +58,7 @@ sudo pacman -S doctl
 ```
 - `sudo` stands for super user do and it temporarily upgrades your privileges to run commands only the `root`user could execute
 - `pacman` stands for package manager and is one of Arch Linux most distinguishing features it can do many things such as install, upgrade, and delete packages
-- `-S` is the flag which lets us install packages with `pacman`.
+- `-S` is the flag which lets us install packages with `pacman` along with the dependencies.
 2. after running the previous command go to https://cloud.digitalocean.com/account/api/tokens
 3. Click on Generate New Token
 4. Input a Token Name
