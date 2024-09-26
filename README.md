@@ -107,7 +107,7 @@ if everything went successfully you should see something like this:
 # Cloud-init
 When trying to manage and configure multiple cloud instances and servers, creating them 1 by 1 can be very time-consuming. This is where Cloud-init comes into play, Cloud-init is an open-source initialization tool that was designed to make getting your systems up and running easy and configured to your liking.
 
-When you deploy a new cloud instance, cloud-init takes the configuration that you gave it and automatically applies it like a checklist. Cloud-init can do a multitude of things such as set Hostnames, configure network interfaces, create user accounts, and even run scripts.[^6]
+When you deploy a new cloud instance, cloud-init takes the configuration that you gave it and automatically applies it like a checklist. Cloud-init can do a multitude of things such as set Hostnames, configure network interfaces, create user accounts, and even run scripts.[^10]
 
 1. we need to create a cloud-init-ALinux.yml file:
 ```bash
@@ -154,3 +154,4 @@ Note: make sure you are in insert mode
 [^7]: https://docs.digitalocean.com/reference/doctl/reference/compute/ssh-key/import/
 [^8]: https://docs.digitalocean.com/reference/doctl/reference/auth/init/
 [^9]: https://docs.digitalocean.com/reference/doctl/reference/account/get/
+[^10]: https://docs.cloud-init.io/en/latest/explanation/introduction.html
