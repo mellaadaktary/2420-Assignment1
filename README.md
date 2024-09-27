@@ -111,8 +111,11 @@ When you deploy a new cloud instance, cloud-init takes the configuration that yo
 
 1. we need to create a cloud-init-ALinux.yml file:
 ```bash
-vim cloud-init-ALinux.yml
+nvim cloud-init-ALinux.yml
 ```
+`nvim` stands for Neovim which is a continuation and extension of Vim the linux text editor
+here we are just using it to create the .yml file
+
 now that we have the file paste this yml file content:
 ```yml
 #cloud-config
@@ -135,9 +138,18 @@ packages:
   - tmux
 disable_root: true
 ```
+- `name:` is for the username of user
+- `primary_group` is for Group name(usually left as username)
+- `groups:` specify which group you want user to be in
+- `wheel` is the group which has access to `sudo` command
+- `shell: /bin/bash` specifies the shell path
+- `sudo: ['ALL=(ALL) NOPASSWD:ALL']` allows for sudo access
+- `ssh-authorized-keys:` specify which SSH key you want to add for the user
+- `ssh-ed25519` is the start of the key add the rest of it from the public key file
+- `packages` installs all packages listed below
+- `disable_root: true` disables root account on the cloud instance(its good practice to do this as it prevents unauthorized access to root account) 
 
-#### explanations of everything above
-how to get public key
+### how to get public key
 
 Note: make sure you are in insert mode
 
