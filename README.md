@@ -28,6 +28,8 @@ ssh-keygen -f ~/.ssh/my-key -C "Your-Email-Address"
 ```~``` is the current users home directory.
 ```-C``` is also a flag which lets you add a comment it is recommended to put something like your name or email address.
 
+this command generates SSH key pairs in the specified directory with a comment inside the public key file
+
 Note: ```ssh-keygen``` has multiple encryption method but we will stick with the default which is ed25519.[^3]
 
 After running this command you will be asked for a passphrase. It is good practice to set a passphrase because if someone gets your private key they can imitate you. Not setting a passphrase would also mean that you trust the root user since they can get into any file with root privileges.
@@ -59,14 +61,27 @@ sudo pacman -S doctl
 - `sudo` stands for super user do and it temporarily upgrades your privileges to run commands only the `root`user could execute
 - `pacman` stands for package manager and is one of Arch Linux most distinguishing features it can do many things such as install, upgrade, and delete packages
 - `-S` is the flag which lets us install packages with `pacman` along with the dependencies.
-2. after running the previous command go to https://cloud.digitalocean.com/account/api/tokens
-3. Click on Generate New Token
-4. Input a Token Name
-5. Leave the Expiration date to 90 days
-6. Select Full Access on Scopes
+- `doctl` is what we are installing
+After installing `doctl` run this command to make sure everything went as planned:
+```bash
+doctl version
+```
+
+this command ensures that the install went smoothly by showing us this in the terminal output:
+![[Pasted image 20240928193242.png]]
+# Creating API token
+ A personal access token lets a user authenticate to a service to access or change the protected resources, these can be used as an alternative to passwords. In our case we need the PAT(Personal Access Token) to link our `doctl` to our Digital Ocean account.
+
+   Note: you must use a browser capable of running JavaScript for this step
+
+1.  go to https://cloud.digitalocean.com/account/api/tokens
+2. Click on Generate New Token
+3. Input a Token Name
+4. Leave the Expiration date to 90 days
+5. Select Full Access on Scopes
 - Note: we give full Access as we want doctl to be able to run the commands as the current users permission level
-8. Click Generate token
-9. Copy the new personal access token it should look something like this:
+6. Click Generate token
+7. Copy the new personal access token it should look something like this:
 ![[personaltoken.png]]
 go back to your terminal and type:
 10. 
@@ -100,6 +115,7 @@ To confirm that our ssh key is paired to our DigitalOcean account we can run:
 ```bash
 doctl compute ssh-key list
 ```
+`list` just shows all the SSh keys which are linked to your account
 if everything went successfully you should see something like this:
 ![[digitaloceanssh.png]]
 #### Explanation
@@ -148,10 +164,7 @@ disable_root: true
 - `ssh-ed25519` is the start of the key add the rest of it from the public key file
 - `packages` installs all packages listed below
 - `disable_root: true` disables root account on the cloud instance(its good practice to do this as it prevents unauthorized access to root account) 
-
-### how to get public key
-
-Note: make sure you are in insert mode
+Note: these packages are here for example reasons your YAML file can be completely different under the packages section
 
 # deploying the droplet
 
@@ -159,7 +172,8 @@ we need to check for our custom image[^11] using the command below:
 ```bash
 doctl compute image list-user
 ```
-
+- `list-user` specifies it to your account
+this command lists the all the private images on your account
 you should see something like this:
 ![[custom-image.png]]
 
@@ -167,25 +181,29 @@ now we can create the droplet[^12] by typing:
 ```bash
 doctl compute droplet create <dropletname> --image <Custom-image-id> --region sfo3 --size s-1vcpu-1gb --ssh-keys <SSH Key ID> --user-data-file <Path-to-cloud-init-ALinux.yml> 
 ```
+- `droplet create` creates a droplet on your account
+- `--image` specifies the image we are gonna use to create the droplet
+- `--region` specifies the region to create the droplet in
+- `--size` indicates the size of the droplet
+- `--ssh-keys` list of SSH key ids to embed in the droplets root access
+- --user-data-file this contains our cloud-init file path
 
-show success page
+After running this command you should see a screen similar to this:
 ![[Pasted image 20240926095958.png]]
 
-### explanations ^
 
-to connect to ur ssh 
+
+# Connecting to Droplet
 ```bash
-ssh -i ~/.ssh/my-key usercloudinitFile@<KEYID>
+ssh -i ~/.ssh/my-key usernamecloudinitFile@<KEYID>
 ```
-
+`-i` specifies which private key to use when connecting to the remote server
+you can run the command below if you are not sure what your `KEYID` is as it will list the SSH keys ID's
 ```bash
 doctl compute ssh-key list
 ```
 
-gives list of ssh keys on digital ocean account
-dosentwork^
-
-
+##### If all has gone according to plan you should be connected to your brand new Droplet using `doctl` , `Cloud-init`, and `SSH` 
 
 # references:
 [^1]: https://www.cloudflare.com/learning/access-management/what-is-ssh/ 
