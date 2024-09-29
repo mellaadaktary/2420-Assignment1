@@ -1,12 +1,12 @@
 # 2420-Assignment1
 
-by the end of this guide users should be able to:
+by the end of this guide users will be able to:
 
-Create SSH keys on your local machine
+Create SSH keys on your local machine.
 
 Create a Droplet running Arch Linux using the `doctl` command-line tool.
 
-use `doctl` and cloud-init to set up an Arch Linux droplet
+use `doctl` and cloud-init to set up an Arch Linux droplet.
 
 
 # Create SSH keys on your local Machine:
@@ -15,7 +15,8 @@ SSH stands for Secure Shell, and it's a method of sending commands securely to a
 ### WHY SSH? 
 Before SSH,  administrators used Telnet, which was a method of sending data to another computer without encrypting the information; this made it prone to security-related threats. There are no authentication policies or data encryption techniques for telnet, which is why it is a huge security risk and another reason why it's less popular since SSH came out. Although it is used in private networks still, it's not used over unsecured or public networks.[^2] 
 
-### creating the SSH keys:
+Note: SSH keys provide secure, password-less login to remote servers and will be essential for our droplet setup.
+### Creating the SSH Keys:
 
 1. Open the Terminal.
 2.  Input:  
@@ -30,7 +31,7 @@ ssh-keygen -f ~/.ssh/my-key -C "Your-Email-Address"
 
 this command generates SSH key pairs in the specified directory with a comment inside the public key file
 
-Note: ```ssh-keygen``` has multiple encryption method but we will stick with the default which is ed25519.[^3]
+Note: ```ssh-keygen``` has multiple encryption methods but we will stick with the default which is ed25519.[^3]
 
 After running this command you will be asked for a passphrase. It is good practice to set a passphrase because if someone gets your private key they can imitate you. Not setting a passphrase would also mean that you trust the root user since they can get into any file with root privileges.
 
@@ -51,7 +52,9 @@ if everything went according to plan you should see something like this:
 ![[sshkeysmade.png]]
 once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
-doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl.[^5] 
+doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl. doctl allows us to create and manage DigitalOcean resources directly from the command line, making it easier to automate droplet creation[^5] 
+
+
 
 to Install doctl we need to run:
 1. 
@@ -164,7 +167,7 @@ disable_root: true
 - `ssh-ed25519` is the start of the key add the rest of it from the public key file
 - `packages` installs all packages listed below
 - `disable_root: true` disables root account on the cloud instance(its good practice to do this as it prevents unauthorized access to root account) 
-Note: these packages are here for example reasons your YAML file can be completely different under the packages section
+Note: these packages are here for example reasons your YAML file can be completely different under the packages section feel free to customize the list.
 
 # deploying the droplet
 
@@ -190,20 +193,17 @@ doctl compute droplet create <dropletname> --image <Custom-image-id> --region sf
 
 After running this command you should see a screen similar to this:
 ![[Pasted image 20240926095958.png]]
-
-
-
 # Connecting to Droplet
 ```bash
 ssh -i ~/.ssh/my-key usernamecloudinitFile@<KEYID>
 ```
-`-i` specifies which private key to use when connecting to the remote server
+- `-i` specifies which private key to use when connecting to the remote server
 you can run the command below if you are not sure what your `KEYID` is as it will list the SSH keys ID's
 ```bash
 doctl compute ssh-key list
 ```
 
-##### If all has gone according to plan you should be connected to your brand new Droplet using `doctl` , `Cloud-init`, and `SSH` 
+##### If everything has gone according to plan, you should now be connected to your brand-new Droplet using `doctl` , `Cloud-init`, and SSH. 
 
 # references:
 [^1]: https://www.cloudflare.com/learning/access-management/what-is-ssh/ 
