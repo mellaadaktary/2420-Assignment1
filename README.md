@@ -71,7 +71,9 @@ After installing `doctl` run this command to make sure everything went as planne
 doctl version
 ```
 
-- `version` ensures that the install went smoothly by showing us this in the terminal output:
+- `version` shows us the version off `doctl` currently installed.
+
+You should see this in the terminal output:
 ![doctl-version](./assets/doctl-version.png)
 # Creating API token
  A personal access token lets a user authenticate to a service to access or change the protected resources, these can be used as an alternative to passwords. In our case we need the PAT(Personal Access Token) to link our `doctl` to our Digital Ocean account.
@@ -107,7 +109,7 @@ doctl account get
 ```
 - `account get` retrieves details from your profile such as Email Address, Team, Account Droplet limit , and more. [^9]
 
-If everything went successfully you should see an output that says this
+If everything went successfully you should see an output that says this:
 
 ![doctlaccountget](./assets/doctlaccountget.png)
 
@@ -115,15 +117,16 @@ We are now going to connect the public SSH key from the previous task to our Dig
 ```bash
  doctl compute ssh-key import <name> --public-key-file ~/.ssh/my-key.pub
 ```
-- `doctl compute ssh-key import` adds a new SSH key to your account
-- `--public-key-file <filepath>` is a flag which needs the public ssh key file
+- `doctl compute ssh-key import` adds a new SSH key to your account.
+- `--public-key-file <filepath>` is a flag which needs the public ssh key file.
 
 To confirm that our ssh key is paired to our DigitalOcean account we can run:
 ```bash
 doctl compute ssh-key list
 ```
-- `list` just shows all the SSH keys which are linked to your account
-if everything went successfully you should see something like this:
+- `list` just shows all the SSH keys which are linked to your account.
+
+If everything went successfully you should see something like this:
 
 ![digitaloceansshkeys](./assets/digitaloceanssh.png)
 
