@@ -24,10 +24,10 @@ Note: SSH keys provide secure, password-less login to remote servers and will be
 ```bash
 ssh-keygen -f ~/.ssh/my-key -C "Your-Email-Address"
 ```
-```ssh-keygen``` is the command which will generate the SSH keys for you.
-```-f``` is a flag or option which stores the SSH keys in the location you specify
-```~``` is the current users home directory.
-```-C``` is also a flag which lets you add a comment it is recommended to put something like your name or email address.
+- ```ssh-keygen``` is the command which will generate the SSH keys for you.
+- ```-f``` is a flag or option which stores the SSH keys in the location you specify
+- ```~``` is the current users home directory.
+- ```-C``` is also a flag which lets you add a comment it is recommended to put something like your name or email address.
 
 This command generates SSH key pairs in the specified directory with a comment inside the public key file
 
@@ -39,17 +39,18 @@ After running this command you will be asked for a passphrase. It is good practi
  ```bash
  cd ~/.ssh
  ```
- ```cd``` stands for change directory.[^4]
+ - ```cd``` stands for change directory.[^4]
  
  1. Input:
  ```bash
 ls
 ```
-```ls``` stands for list directory contents.[^4]
+- ```ls``` stands for list directory contents.[^4]
 
 If everything went according to plan you should see something like this:
 
 ![[sshkeysmade.png]]
+
 once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
 doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl. doctl allows us to create and manage DigitalOcean resources directly from the command line, making it easier to automate droplet creation[^5] 
@@ -70,7 +71,7 @@ After installing `doctl` run this command to make sure everything went as planne
 doctl version
 ```
 
-This command ensures that the install went smoothly by showing us this in the terminal output:
+- `version` ensures that the install went smoothly by showing us this in the terminal output:
 ![[Pasted image 20240928193242.png]]
 # Creating API token
  A personal access token lets a user authenticate to a service to access or change the protected resources, these can be used as an alternative to passwords. In our case we need the PAT(Personal Access Token) to link our `doctl` to our Digital Ocean account.
@@ -88,7 +89,8 @@ This command ensures that the install went smoothly by showing us this in the te
 
 ![[personaltoken.png]]
 
-Go back to your terminal and type:
+Go back to your terminal and type: 
+
 10. 
 ```bash 
 doctl auth init
@@ -107,7 +109,7 @@ doctl account get
 ```
 - `account get` retrieves details from your profile such as Email Address, Team, Account Droplet limit , and more. [^9]
 
-if everything went successfully you should see an output that says this
+If everything went successfully you should see an output that says this
 
 ![[doctl account get.png]]
 
@@ -122,11 +124,10 @@ To confirm that our ssh key is paired to our DigitalOcean account we can run:
 ```bash
 doctl compute ssh-key list
 ```
-`list` just shows all the SSH keys which are linked to your account
+- `list` just shows all the SSH keys which are linked to your account
 if everything went successfully you should see something like this:
 
 ![[digitaloceanssh.png]]
-#### Explanation
 
 # Cloud-init
 When trying to manage and configure multiple cloud instances and servers, creating them 1 by 1 can be very time-consuming. This is where Cloud-init comes into play, Cloud-init is an open-source initialization tool that was designed to make getting your systems up and running easy and configured to your liking.
@@ -137,7 +138,7 @@ When you deploy a new cloud instance, cloud-init takes the configuration that yo
 ```bash
 nvim cloud-init-ALinux.yml
 ```
-`nvim` stands for Neovim which is a continuation and extension of Vim the linux text editor
+- `nvim` stands for Neovim which is a continuation and extension of Vim the linux text editor
 here we are just using it to create the .yml file
 
 Now that we have the file paste this yml file content:
@@ -172,6 +173,7 @@ disable_root: true
 - `ssh-ed25519` is the start of the key add the rest of it from the public key file
 - `packages` installs all packages listed below
 - `disable_root: true` disables root account on the cloud instance(its good practice to do this as it prevents unauthorized access to root account) 
+
 Note: these packages are here for example reasons your YAML file can be completely different under the packages section feel free to customize the list.
 
 # Deploying the droplet
@@ -181,7 +183,9 @@ We need to check for our custom image[^11] using the command below:
 doctl compute image list-user
 ```
 - `list-user` specifies it to your account
+
 this command lists the all the private images on your account
+
 you should see something like this:
 
 ![[custom-image.png]]
@@ -198,6 +202,7 @@ doctl compute droplet create <dropletname> --image <Custom-image-id> --region sf
 - --user-data-file this contains our cloud-init file path
 
 After running this command you should see a screen similar to this:
+
 ![[Pasted image 20240926095958.png]]
 # Connecting to Droplet
 ```bash
@@ -209,7 +214,7 @@ you can run the command below if you are not sure what your `IPv4` is.
 doctl compute ssh-key list
 ```
 
-##### If everything has gone according to plan, you should now be connected to your brand-new Droplet using `doctl` , `Cloud-init`, and SSH. 
+#### If everything has gone according to plan, you should now be connected to your brand-new Droplet using `doctl` , `Cloud-init`, and SSH. 
 
 # references:
 [^1]: https://www.cloudflare.com/learning/access-management/what-is-ssh/ 
