@@ -49,7 +49,7 @@ ls
 
 If everything went according to plan you should see something like this:
 
-![[sshkeysmade.png]]
+![SSH Keys Made](sshkeysmade.png)
 
 once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
@@ -58,7 +58,7 @@ doctl is the official DigitalOcean command line interface that allows you to int
 
 
 To Install doctl we need to run:
-1. 
+
 ``` bash
 sudo pacman -S doctl
 ```
@@ -72,7 +72,7 @@ doctl version
 ```
 
 - `version` ensures that the install went smoothly by showing us this in the terminal output:
-![[Pasted image 20240928193242.png]]
+![doctl-version](doctl-version.png)
 # Creating API token
  A personal access token lets a user authenticate to a service to access or change the protected resources, these can be used as an alternative to passwords. In our case we need the PAT(Personal Access Token) to link our `doctl` to our Digital Ocean account.
 
@@ -86,7 +86,7 @@ doctl version
 6. Click Generate token
 7. Copy the new personal access token it should look something like this:
 
-![[personaltoken.png]]
+![personal token](personaltoken.png)
 
 10. Go back to your terminal and type: 
 
@@ -109,7 +109,7 @@ doctl account get
 
 If everything went successfully you should see an output that says this
 
-![[doctl account get.png]]
+![doctlaccountget](doctlaccountget.png)
 
 We are now going to connect the public SSH key from the previous task to our DigitalOcean account by running:[^7]
 ```bash
@@ -125,14 +125,14 @@ doctl compute ssh-key list
 - `list` just shows all the SSH keys which are linked to your account
 if everything went successfully you should see something like this:
 
-![[digitaloceanssh.png]]
+![digitaloceansshkeys](digitaloceanssh.png)
 
 # Cloud-init
 When trying to manage and configure multiple cloud instances and servers, creating them 1 by 1 can be very time-consuming. This is where Cloud-init comes into play, Cloud-init is an open-source initialization tool that was designed to make getting your systems up and running easy and configured to your liking.
 
 When you deploy a new cloud instance, cloud-init takes the configuration that you gave it and automatically applies it like a checklist. Cloud-init can do a multitude of things such as set Hostnames, configure network interfaces, create user accounts, and even run scripts.[^10]
 
-1. We need to create a cloud-init-ALinux.yml file:
+We need to create a cloud-init-ALinux.yml file:
 ```bash
 nvim cloud-init-ALinux.yml
 ```
@@ -186,7 +186,7 @@ this command lists the all the private images on your account
 
 you should see something like this:
 
-![[custom-image.png]]
+![custom-image-arch](custom-image.png)
 
 Now we can create the droplet[^12] by typing:
 ```bash
@@ -201,7 +201,7 @@ doctl compute droplet create <dropletname> --image <Custom-image-id> --region sf
 
 After running this command you should see a screen similar to this:
 
-![[Pasted image 20240926095958.png]]
+![new-droplet](Pastedimage20240926095958.png)
 # Connecting to Droplet
 ```bash
 ssh -i ~/.ssh/my-key usernamecloudinitFile@<IPv4-address>
