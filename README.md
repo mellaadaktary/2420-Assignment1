@@ -49,7 +49,7 @@ ls
 
 If everything went according to plan you should see something like this:
 
-![SSH Keys Made](sshkeysmade.png)
+![SSH Keys Made](./assets/sshkeysmade.png)
 
 once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
@@ -72,7 +72,7 @@ doctl version
 ```
 
 - `version` ensures that the install went smoothly by showing us this in the terminal output:
-![doctl-version](doctl-version.png)
+![doctl-version](./assets/doctl-version.png)
 # Creating API token
  A personal access token lets a user authenticate to a service to access or change the protected resources, these can be used as an alternative to passwords. In our case we need the PAT(Personal Access Token) to link our `doctl` to our Digital Ocean account.
 
@@ -86,7 +86,7 @@ doctl version
 6. Click Generate token
 7. Copy the new personal access token it should look something like this:
 
-![personal token](personaltoken.png)
+![personal token](./assets/personaltoken.png)
 
 10. Go back to your terminal and type: 
 
@@ -109,7 +109,7 @@ doctl account get
 
 If everything went successfully you should see an output that says this
 
-![doctlaccountget](doctlaccountget.png)
+![doctlaccountget](./assets/doctlaccountget.png)
 
 We are now going to connect the public SSH key from the previous task to our DigitalOcean account by running:[^7]
 ```bash
@@ -125,7 +125,7 @@ doctl compute ssh-key list
 - `list` just shows all the SSH keys which are linked to your account
 if everything went successfully you should see something like this:
 
-![digitaloceansshkeys](digitaloceanssh.png)
+![digitaloceansshkeys](./assets/digitaloceanssh.png)
 
 # Cloud-init
 When trying to manage and configure multiple cloud instances and servers, creating them 1 by 1 can be very time-consuming. This is where Cloud-init comes into play, Cloud-init is an open-source initialization tool that was designed to make getting your systems up and running easy and configured to your liking.
@@ -186,7 +186,7 @@ this command lists the all the private images on your account
 
 you should see something like this:
 
-![custom-image-arch](custom-image.png)
+![custom-image-arch](./assets/custom-image.png)
 
 Now we can create the droplet[^12] by typing:
 ```bash
@@ -201,7 +201,7 @@ doctl compute droplet create <dropletname> --image <Custom-image-id> --region sf
 
 After running this command you should see a screen similar to this:
 
-![new-droplet](Pastedimage20240926095958.png)
+![new-droplet](./assets/Pastedimage20240926095958.png)
 # Connecting to Droplet
 ```bash
 ssh -i ~/.ssh/my-key usernamecloudinitFile@<IPv4-address>
