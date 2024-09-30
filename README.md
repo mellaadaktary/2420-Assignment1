@@ -83,15 +83,13 @@ doctl version
 3. Input a Token Name
 4. Leave the Expiration date to 90 days
 5. Select Full Access on Scopes
-- Note: we give full Access as we want doctl to be able to run the commands as the current users permission level
 6. Click Generate token
 7. Copy the new personal access token it should look something like this:
 
 ![[personaltoken.png]]
 
-Go back to your terminal and type: 
+10. Go back to your terminal and type: 
 
-10. 
 ```bash 
 doctl auth init
 ```
