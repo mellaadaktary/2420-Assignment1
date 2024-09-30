@@ -53,9 +53,7 @@ If everything went according to plan you should see something like this:
 
 once we have our keys we now need to install ``` doctl``` in order to create the droplet
 # Installing doctl
-doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl. doctl allows us to create and manage DigitalOcean resources directly from the command line, making it easier to automate droplet creation[^5] 
-
-
+doctl is the official DigitalOcean command line interface that allows you to interact with the DigitalOcean API with the command line. Just like the control panel, you can create, configure, and destroy DigitalOcean resources such as Droplets using doctl. doctl allows us to create and manage DigitalOcean resources directly from the command line, making it easier to automate droplet creation.[^5] 
 
 To Install doctl we need to run:
 
@@ -183,7 +181,7 @@ We need to check for our custom image[^11] using the command below:
 ```bash
 doctl compute image list-user
 ```
-- `list-user` specifies it to your account
+- `list-user` tells `doctl` to list all the images on your account.
 
 this command lists the all the private images on your account
 
@@ -193,14 +191,14 @@ you should see something like this:
 
 Now we can create the droplet[^12] by typing:
 ```bash
-doctl compute droplet create <dropletname> --image <Custom-image-id> --region sfo3 --size s-1vcpu-1gb --ssh-keys <SSH Key ID> --user-data-file <Path-to-cloud-init-ALinux.yml> 
+doctl compute droplet create <dropletname> --image <Custom-image-id> --region sfo3 --size s-1vcpu-1gb --ssh-keys <SSH-Key-ID> --user-data-file <Path-to-cloud-init-ALinux.yml> 
 ```
 - `droplet create` creates a droplet on your account
 - `--image` specifies the image we are gonna use to create the droplet
 - `--region` specifies the region to create the droplet in
 - `--size` indicates the size of the droplet
 - `--ssh-keys` list of SSH key ids to embed in the droplets root access
-- --user-data-file this contains our cloud-init file path
+- `--user-data-file` this contains our cloud-init file path
 
 After running this command you should see a screen similar to this:
 
@@ -210,11 +208,14 @@ After running this command you should see a screen similar to this:
 ssh -i ~/.ssh/my-key usernamecloudinitFile@<IPv4-address>
 ```
 - `-i` specifies which private key to use when connecting to the remote server
+- `~/.ssh/my-key` is the path to your private SSH key
+- `usernamecloudinitFile@<IPv4-address>` is an argument which needs the username on your `cloud-init` file and the IPv4 address.
+
 you can run the command below if you are not sure what your `IPv4` is.
 ```bash
-doctl compute ssh-key list
+doctl compute droplet list
 ```
-
+- `droplet list` shows the droplets on your DigitalOcean account with all the details  
 #### If everything has gone according to plan, you should now be connected to your brand-new Droplet using `doctl` , `Cloud-init`, and SSH. 
 
 # references:
