@@ -1,4 +1,4 @@
-# 2420-Assignment1
+# Arch Linux Cloud Provisioning with Cloud-Init
 
 By the end of this guide users will be able to:
 
